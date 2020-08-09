@@ -1,0 +1,23 @@
+name: deuteron
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - cvxpy
+  - iminuit
+  - pip
+  - pytest
+  - python=3.7.5
+  - pip:
+    - jupyter
+    - jupyterlab
+    - matplotlib
+    - noisyopt
+    - numpy
+    - openfermion
+    - pandas
+    - pyyaml
+    - qiskit==0.19.2
+    - scipy
+    - seaborn
+    - tqdm
