@@ -171,18 +171,3 @@ def pauli_expectation_value(pauli, meas_results):
     num_1_outcomes = sum([meas_results[key] for key in eigenvalues.keys() if eigenvalues[key] == -1])
 
     return (num_0_outcomes - num_1_outcomes) / n_shots
-
-
-def string_to_xanadu_pauli(p_string):
-    if len(p_string) == 0:
-        raise ValueError(f"Encountered empty Pauli string.")
-
-    if any([p not in pauli_dict.keys() for p in p_string]):
-        raise ValueError(f"Invalid Pauli {p_string}. Paulis consist of only I, X, Y, and  Z.")
-
-    start = pauli_dict[p_string[0]](0)
-
-    for next_idx in range(1, len(p_string)):
-        start = start @ pauli_dict[p_string[next_idx]](next_idx)
-  
-    return start

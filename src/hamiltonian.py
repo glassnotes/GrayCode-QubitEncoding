@@ -227,7 +227,6 @@ class DenseEncodingHamiltonian(EncodingHamiltonian):
 
     def _partition(self):
         # Partition the Paulis and their co-efficients here
-        # I'm sorry this is so ugly
         term_bins = {} 
         pauli_keys = list(self.pauli_rep.terms.keys())
 

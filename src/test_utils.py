@@ -115,15 +115,3 @@ class TestGetPauliMatrix:
                       [1j, 0, 0, 0, 0, 0, 0, 0],
                       [0, 0, 0, -1j, 0, 0, 0, 0],
                       [0, 0, 1j, 0, 0, 0, 0, 0]]))
-
-
-class TestXanaduPauli:
-    def test_invalid_input(self):
-        with pytest.raises(ValueError):
-            string_to_xanadu_pauli('')
-            string_to_xanadu_pauli('A')
-            string_to_xanadu_pauli('ZYAC')
-
-    def test_string_to_pauli(self):
-        # TODO - need to find a way to get matrix rep or something
-        assert True

@@ -23,87 +23,9 @@ from qiskit_circuits import *
 from device import Device
 
 
-def convert_depricated_parameters(parameters):
-    """
-    Translates old input variable into new input variables.
-    TO DELETE once validation complete
-    """
-    ###############################################################################################
-    #  Raise error if both 'N_states' and 'states' are given in input file 
-    if ('N_states' in parameters.keys()) and ('states' in parameters.keys()):
-        raise ValueError("Number of states specified by 'N_states' and 'states'.  Please choose one." )
-    # If 'N_states' not defined but 'states' is, set 'N_states' value to 'states' value and remove 'states'
-    elif ('N_states' not in parameters.keys()) and ('states' in parameters.keys()):    
-        parameters['N_states']=parameters['states']
-        del parameters['states']
-
-    ###############################################################################################
-    #  Raise error if both 'hamiltonian' and 'encoding' are given in input file 
-    if ('hamiltonian' in parameters.keys()) and ('encoding' in parameters.keys()):
-        raise ValueError("Encoding of Hamiltonian specified twice by 'hamiltonian' and 'encoding'.  Please choose one." )
-    
-    # If 'encoding' not defined but 'hamiltonian' is, set 'encoding' value to converted 'hamiltonian' value 
-    elif ('encoding' not in parameters.keys()) and ('hamiltonian' in parameters.keys()):    
-        if parameters['hamiltonian']=='dense':
-            parameters['encoding']='gray_code'
-        elif parameters['hamiltonian']=='sparse':
-            parameters['encoding']='jordan_wigner'
-
-        # Remove deprecated key
-        del parameters['hamiltonian']
-
-    ###############################################################################################
-    #  Raise error if both 'N_trials' and 'experiments' are given in input file 
-    if ('N_trials' in parameters.keys()) and ('experiments' in parameters.keys()):
-        raise ValueError("Number of trials specified by 'N_trials' and 'experiments'.  Please choose one." )
-    # If 'N_trials' not defined but 'experiments' is, set 'N_trials' value to 'experiments value 
-    elif ('N_trials' not in parameters.keys()) and ('experiments' in parameters.keys()):    
-        parameters['N_trials']=parameters['experiments']
-        del parameters['experiments']
-
-    ###############################################################################################
-    #  Raise error if both 'N_trials' and 'experiments' are given in input file 
-    if ('N_shots' in parameters.keys()) and ('shots' in parameters.keys()):
-        raise ValueError("Number of shots specified by 'N_shots' and 'shots'.  Please choose one." )
-    # If 'N_trials' not defined but 'experiments' is, set 'N_trials' value to 'experiments value 
-    elif ('N_shots' not in parameters.keys()) and ('shots' in parameters.keys()):    
-        parameters['N_shots']=parameters['shots']
-        del parameters['shots']
-
-    ###############################################################################################
-    #  Raise error if both 'N_trials' and 'experiments' are given in input file 
-    if ('N_iter' in parameters.keys()) and ('niter' in parameters.keys()):
-        raise ValueError("Number of optimizer iteratations specified by 'N_iter' and 'niter'.  Please choose one." )
-    # If 'N_trials' not defined but 'experiments' is, set 'N_trials' value to 'experiments value 
-    elif ('N_iter' not in parameters.keys()) and ('niter' in parameters.keys()):    
-        parameters['N_iter']=parameters['niter']
-        del parameters['niter']
-
-    ###############################################################################################
-    #  Raise error if both 'N_trials' and 'experiments' are given in input file 
-    if ('N_cpus' in parameters.keys()) and ('ncpus' in parameters.keys()):
-        raise ValueError("Number of parallel processes specified by 'N_cpus' and 'ncpus'.  Please choose one." )
-    # If 'N_trials' not defined but 'experiments' is, set 'N_trials' value to 'experiments value 
-    elif ('N_cpus' not in parameters.keys()) and ('ncpus' in parameters.keys()):    
-        parameters['N_cpus']=parameters['ncpus']
-        del parameters['ncpus']
-
-    ###############################################################################################
-    #  Raise error if both output_dir and prefix are given in input file 
-    if ('output_dir' in parameters.keys()) and ('prefix' in parameters.keys()):
-        raise ValueError("Ouput directory specified by 'output_dir' and 'prefix'.  Please choose one." )
-    # If output_dir not defined but prefix is, set output_dir value to prefix value and remove prefix
-    elif ('output_dir' not in parameters.keys()) and ('prefix' in parameters.keys()):    
-        parameters['output_dir']=parameters['prefix']
-        del parameters['prefix']
-
-    return parameters
-
-###############################################################################################
 def set_parameters(parameters):
     """
     Set any parameters not included in input parameter file to default values.
-    TODO: Delete Deprecated code once testing completed. 
 
     Parameters:
         parameters (dictionary) : Input parameters for VQE.  
@@ -200,7 +122,6 @@ def compute_energy(theta, backend, hamiltonian, device=None, shots=10000):
 
         shots (int, optional): Number of repetitions of each circuit, for sampling. Default: 10000.
         
-
     """
     # Cumulative energy
     energy = 0

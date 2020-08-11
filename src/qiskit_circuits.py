@@ -84,7 +84,7 @@ def dense_variational_circuit(thetas, measured_idx, backend_name):
 
     Returns:
         circuit (QuantumCircuit) : quantum circuit 
-
+        
     """
     N_states = len(thetas) + 1
     N_qubits = int(np.ceil(np.log2(N_states)))
