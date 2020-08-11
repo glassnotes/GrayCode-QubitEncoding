@@ -1,0 +1,13 @@
+encoding: 'gray_code'
+N_states: 2
+backend: 'statevector_simulator'
+N_shots: 10000
+N_cpus: 1
+spsa_a: 0.628
+spsa_c: 0.1
+N_iter: 1000
+optimizer: 'SPSA'
+N_trials: 2 
+device_name: 'none'
+mitigate_meas_error: False
+output_dir: 'outputs-qiskit-statevector_simulator'
