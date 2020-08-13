@@ -1,6 +1,6 @@
 # Improving Hamiltonian encodings with the Gray code
 
-Obtain energies for deuteron Hamiltonian defined in [REF] using a variational quantum eigensolver.
+Obtain energies for deuteron Hamiltonian defined in [https://arxiv.org/abs/2008.05012](https://arxiv.org/abs/2008.05012) using a variational quantum eigensolver.
 
 ## Installation
 
