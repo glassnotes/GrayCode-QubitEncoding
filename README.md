@@ -1,6 +1,6 @@
 # Improving Hamiltonian encodings with the Gray code
 
-Obtain energies for deuteron Hamiltonian defined in [https://arxiv.org/abs/2008.05012](https://arxiv.org/abs/2008.05012) using a variational quantum eigensolver. Code was written jointly by Olivia Di Matteo (@glassnotes), Anna McCoy (@aemccoy), Peter Gysbers (@pgysbers) and Takayuki Miyagi (@Takayuki-Miyagi). 
+Obtain energies for deuteron Hamiltonian defined in [https://arxiv.org/abs/2008.05012](https://arxiv.org/abs/2008.05012) using a variational quantum eigensolver. Code was written jointly by Olivia Di Matteo ([@glassnotes](https://github.com/glassnotes/)), Anna McCoy ([@aemccoy](https://github.com/aemccoy/)), Peter Gysbers ([@pgysbers](https://github.com/pgysbers)) and Takayuki Miyagi ([@Takayuki-Miyagi](https://github.com/Takayuki-Miyagi)). 
 
 ## Installation
 
