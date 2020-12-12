@@ -51,7 +51,7 @@ for filename in os.listdir("."):
       continue
    print(filename)
 
-   enc_type = 'Gray code' if 'gray_code' in filename else 'One-Hot'
+   enc_type = 'Gray code' if 'gray_code' in filename else 'one-hot'
    optimizer = 'SPSA' if 'SPSA' in filename else 'Nelder-Mead'
    sim_type = 'QASM' if 'qasm' in filename else statevector
    meas_mit = 'True' if 'mit_meas' in filename else 'False'
