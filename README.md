@@ -49,7 +49,7 @@ If optional boolean `save_to_textfile` at start of main is set to `True`, text v
         encoding (string) -- specifies encoding of deuteron Hamiltonian.  See paper [XREF]
             Supported encodings are:
                'gray_code'  (default)
-               'jordan_wigner' 
+               'one_hot'
      
         N_trials (int) -- number of independent trials to run.  (Default value : 1). 
      
@@ -71,7 +71,7 @@ If optional boolean `save_to_textfile` at start of main is set to `True`, text v
                 'ibmq_london'
                 'ibmq_vigo'
 
-        layout (list) -- Specification of which physical qubits on a device to use and the initial qubit ordering (the ordering may be changed by SWAPs during circuit execution, this corresponds to using the "initial_layout" argument for qiskit.execute()). The length of the list must correspond to 'N_qubits' (i.e. N_states with jordan_wigner encoding, ceil(log_2(N_states)) with gray_code)
+        layout (list) -- Specification of which physical qubits on a device to use and the initial qubit ordering (the ordering may be changed by SWAPs during circuit execution, this corresponds to using the "initial_layout" argument for qiskit.execute()). The length of the list must correspond to 'N_qubits' (i.e. N_states with one_hot encoding, ceil(log_2(N_states)) with gray_code)
             None (default)
             Examples with 3 qubits on a 5 qubit device:
             [0, 1, 2]

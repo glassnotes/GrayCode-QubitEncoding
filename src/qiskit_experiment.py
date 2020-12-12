@@ -51,8 +51,8 @@ def set_parameters(parameters):
                       }
 
     for param in parameters:
-        if (param == 'encoding') and (parameters['encoding']!='gray_code' and parameters['encoding']!='jordan_wigner'):
-            raise ValueError("Encoding {} not supported.  Please select 'gray_code' or 'jordan_wigner'. ".format(parameters['encoding']) )
+        if (param == 'encoding') and (parameters['encoding']!='gray_code' and parameters['encoding']!='one_hot'):
+            raise ValueError("Encoding {} not supported.  Please select 'gray_code' or 'one_hot'. ".format(parameters['encoding']) )
         if (param == 'backend') and (parameters['backend']!='statevector_simulator' and parameters['backend']!='qasm_simulator'):
             raise ValueError("Backend {} not supported.  Please select 'statevector_simulator' or 'qasm_simulator'. ")
 

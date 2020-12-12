@@ -19,7 +19,7 @@
 #      encoding (string) -- specifies encoding of deuteron Hamiltonian.  See paper [XREF]
 #          Supported encodings are:
 #             'gray_code'  (default)
-#             'jordan_wigner'
+#             'one_hot'
 #
 #      N_trials (int) -- number of independent trials to run.  (Default value : 1).
 #
@@ -103,14 +103,14 @@ if __name__ == "__main__":
     parameters=set_parameters(parameters)
 
     ###############################################################################################
-    # Generate Hamiltonian representation in chosen basis (Gray code or Jordan-Wigner)
+    # Generate Hamiltonian representation in chosen basis (Gray code or one-hot)
     # and determine number of parameters for wavefunction for given encoding
     ham = None
     N_theta=0
     if parameters['encoding'] == 'gray_code':
         ham = DenseEncodingHamiltonian(N_states=parameters['N_states'])
         N_theta=2 ** ham.N_qubits - 1
-    elif parameters['encoding'] == 'jordan_wigner':
+    elif parameters['encoding'] == 'one_hot':
         ham = SparseEncodingHamiltonian(N_states=parameters['N_states'])
         N_theta=ham.N_qubits-1
 

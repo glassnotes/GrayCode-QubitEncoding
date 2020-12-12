@@ -3,7 +3,7 @@ from qiskit import ClassicalRegister, QuantumRegister, QuantumCircuit
 import numpy as np
 
 def sparse_variational_circuit(thetas, measured_idx, backend_name, num_cnot_pairs=0, num_folding=0):
-    """ Creates a variational ansatz for the Jordan-Wigner encoding.
+    """ Creates a variational ansatz for the one-hot encoding.
 
     These circuits were defined in arXiv:1904.04338, and produce an ansatz state
     over the occupation subset of the computational basis (|1000>, |0100>, etc.)
