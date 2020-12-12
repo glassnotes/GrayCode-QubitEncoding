@@ -35,6 +35,8 @@ diagonalized_values = [
 for filename in os.listdir("."):
    if "bkp" in filename:
       continue
+   if "CNOT" in filename:
+      continue
    if "energies.npy" not in filename:
       continue
    if "4_states" not in filename:
@@ -48,7 +50,7 @@ for filename in os.listdir("."):
       continue
    print(filename)
 
-   enc_type = 'Gray code' if 'gray_code' in filename else 'Jordan-Wigner'
+   enc_type = 'Gray code' if 'gray_code' in filename else 'One-Hot'
    optimizer = 'SPSA' if 'SPSA' in filename else 'Nelder-Mead'
    sim_type = 'QASM' if 'qasm' in filename else statevector
    meas_mit = 'True' if 'mit_meas' in filename else 'False'
@@ -90,7 +92,7 @@ for filename in os.listdir("."):
 
 print(df.groupby(['device','layout','enc_type','sim_type','n_states','shots','optimizer','meas_mit']).describe())
 
-colours = {'Gray code' : "tab:blue", 'Jordan-Wigner' : "tab:orange", 'None' : "tab:gray"}
+colours = {'Gray code' : "tab:blue", 'One-Hot' : "tab:orange", 'None' : "tab:gray"}
 
 linestyles = {'True' : (0,(5,1)), 'False' : (0,(1,1)), 'None' : '-.'}
  
@@ -110,7 +112,7 @@ for key, grp in df.groupby('enc_type'):
          else:
              raise ValueError
          #plt.hist(mit_grp['energy'])
-         sns.kdeplot(mit_grp['energy'], bw='scott', label=label,color=colours[key],linestyle=linestyles[mit_key[0]], ax=ax)
+         sns.kdeplot(mit_grp['energy'], bw_method='scott', label=label,color=colours[key],linestyle=linestyles[mit_key[0]], ax=ax)
 
     ax.axvline(x=diagonalized_values[4][1], color='black', label='True value (N = 4)', alpha=0.8)
 
@@ -122,9 +124,10 @@ for key, grp in df.groupby('enc_type'):
         ax.legend((m1,m3,m2,m4), ('Noise', 'No noise', 'Noise w/ mitigation', 'True value (N=4)'),
             fontsize=16, loc='lower right')
         #ax.legend(fontsize=14, loc='lower right')
-    else:
-        ax.legend_.remove()
+    #else:
+    #    ax.legend_.remove()
 
+    ax.set_ylabel(None)
     ax.set_xlabel("Energy", fontsize=16)
     ax.set_xlim(-3,0)
     plt.ylim(0,6)
