@@ -71,7 +71,10 @@ class SparseEncodingHamiltonian(EncodingHamiltonian):
         """
         super(SparseEncodingHamiltonian, self).__init__(N_states, N_states, qiskit_order)
 
-        self.pauli_rep = jordan_wigner(self.ferm_rep) # In terms of Paulis; for sparse Hamiltonian just JW
+        # In the very special case of our deuteron problem, the Jordan-Wigner transformation
+        # produces an equivalent Hamiltonian to a manually-made one-hot encoding. Use it here to
+        # save some effort in reimplementing the construction.
+        self.pauli_rep = jordan_wigner(self.ferm_rep) # Express in terms of Paulis
         self.relabel_qubits() # 0 index the qubits to match dense representation
 
         self.pauli_partitions = self._partition()
