@@ -58,19 +58,23 @@ class EncodingHamiltonian():
 
 class SparseEncodingHamiltonian(EncodingHamiltonian):
     def __init__(self, N_states, qiskit_order=True):    
-        """ Class for the Jordan-Wigner encoded Hamiltonian.  Based on Hamiltonian 
-            in original deuteron calculation paper arXiv:1801.03897.
+        """Class for the one-hot encoded Hamiltonian.  Based on Hamiltonian in original
+            deuteron calculation paper arXiv:1801.03897.
 
         Parameters: 
             N_states (int): The number of harmonic oscillator states to consider. For sparse
                 encoding, this is the same as the number of qubits. 
 
             qiskit_order (bool): Determines whether to order the qubits in qiskit order, i.e.
-                in "reverse" as compared to the typical ordering. 
+                in "reverse" as compared to the typical ordering.
+
         """
         super(SparseEncodingHamiltonian, self).__init__(N_states, N_states, qiskit_order)
 
-        self.pauli_rep = jordan_wigner(self.ferm_rep) # In terms of Paulis; for sparse Hamiltonian just JW
+        # In the very special case of our deuteron problem, the Jordan-Wigner transformation
+        # produces an equivalent Hamiltonian to a manually-made one-hot encoding. Use it here to
+        # save some effort in reimplementing the construction.
+        self.pauli_rep = jordan_wigner(self.ferm_rep) # Express in terms of Paulis
         self.relabel_qubits() # 0 index the qubits to match dense representation
 
         self.pauli_partitions = self._partition()
@@ -143,7 +147,7 @@ class SparseEncodingHamiltonian(EncodingHamiltonian):
 
 class DenseEncodingHamiltonian(EncodingHamiltonian):
     def __init__(self, N_states, qiskit_order=True, kill_bad_states=True):
-        """ Class for Gray code encoding that uses N qubits to represent 2^N states.  [TODO:REF]
+        """ Class for Gray code encoding that uses N qubits to represent 2^N states. [2008.05012]
 
         Parameters:
             N_states (int) : The number of harmonic oscillator states to consider. For this
@@ -170,8 +174,8 @@ class DenseEncodingHamiltonian(EncodingHamiltonian):
         self.state_order = gray_code(self.N_qubits)
         self.permutation = [int("0b" + x, 2) for x in self.state_order] 
 
-        # Pauli representation is not Jordan-Wigner anymore, it is the sequence of projectors 
-        # that produce the gray code sequence. Outsource to another class method.
+        # Pauli representation is not is the sequence of projectors that produce
+        # the gray code sequence. Outsource to another class method.
         self.pauli_rep = self._build_pauli_rep() 
         self.pauli_partitions = self._partition()
         self.n_partitions = len(self.pauli_partitions.keys())
